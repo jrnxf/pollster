@@ -1,0 +1,32 @@
+{% extends 'base.html'%} {% block content %}
+
+<article class="panel is-info">
+  <p class="panel-heading">
+    {{ question.question_text }}
+  </p>
+  {% for choice in question.choice_set.all %}
+  <a class="panel-block is-active">
+    <div
+      style="display: flex; justify-content: space-between; width: 100%; align-items: center"
+    >
+      <p class="is-5">{{ choice.choice_text }}</p>
+      <span class="tag is-info"
+        >{{ choice.votes }} vote{{ choice.votes | pluralize }}</span
+      >
+    </div>
+  </a>
+  {% endfor %}
+</article>
+
+<div class="field is-grouped">
+  <p class="control">
+    <a href="{% url 'polls:poll' question.id %}" class="button is-success">Answer</a>
+  </p>
+  <p class="control">
+    <a href="{% url 'polls:index' %}" class="button">
+      Back
+    </a>
+  </p>
+</div>
+
+{% endblock %}

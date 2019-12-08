@@ -1,0 +1,32 @@
+{% extends 'base.html'%} {% block content %}
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Questions
+      </h1>
+    </div>
+  </div>
+</section>
+{% if latest_question_list%} {% for question in latest_question_list %}
+<div style="padding: 0 1.5rem;">
+  <div class="card" style="margin-bottom:2em">
+    <div class="card-content">
+      <div class="subtitle">
+        {{ question.question_text }}
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="{% url 'polls:poll' question.id %}" class="card-footer-item"
+        >Vote Now</a
+      >
+      <a href="{% url 'polls:results' question.id %}" class="card-footer-item"
+        >Results</a
+      >
+    </div>
+  </div>
+</div>
+
+{% endfor %} {% else %}
+<p>No polls available</p>
+{% endif%} {% endblock %}
